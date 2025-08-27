@@ -299,3 +299,5 @@ For any questions or issues about the paper and implementation, please open an i
   year={2025}
 }
 ```
+
+python scripts/data_generation/prepare_finetuning_data.py --dataset subpop_train --train_ratio 0.9 --val_ratio 0.1 --test_ratio 0.0 --dataset subpop-train
