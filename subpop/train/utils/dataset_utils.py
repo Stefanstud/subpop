@@ -19,8 +19,8 @@ def get_preprocessed_dataset(
             return dataset_config.train_split
         elif split == "valid":
             return dataset_config.valid_split
-        elif split == "test":
-            return dataset_config.test_split
+        # elif split == "test":
+        #     return dataset_config.test_split
         else:
             raise ValueError(f"Unknown split: {split}")
 
