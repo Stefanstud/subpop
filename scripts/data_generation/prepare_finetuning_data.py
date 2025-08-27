@@ -3,7 +3,6 @@ import argparse
 import os
 import pathlib
 import random
-from enum import Enum
 from typing import List, Optional
 
 import pandas as pd
@@ -11,7 +10,7 @@ import numpy as np
 from tqdm import tqdm
 
 from subpop.survey.config import SteeringPromptType
-from subpop.utils.survey_utils import generate_mcq, list_normalize
+from subpop.utils.survey_utils import generate_mcq
 from subpop.utils.random_utils import set_random_seed
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
@@ -60,13 +59,13 @@ def prepare_data(
     assert train_ratio >= 0 and val_ratio >= 0 and test_ratio >= 0, "Ratios should be non-negative."
     assert sum([train_ratio, val_ratio, test_ratio]) == 1, "Ratios should sum up to 1."
 
-    full_survey_df: pd.DataFrame = pd.read_csv(survey_file_path)
+    full_survey_df: pd.DataFrame = pd.read_json(survey_file_path, lines=True)
     steering_prompts_df: pd.DataFrame = pd.read_json(steering_prompts_file_path)
     steering_demographics_df: pd.DataFrame = pd.read_csv(steering_demographics_file_path)
 
-    full_survey_df["responses"] = full_survey_df["responses"].apply(ast.literal_eval)
-    full_survey_df["ordinal"] = full_survey_df["ordinal"].apply(ast.literal_eval)
-    full_survey_df["options"] = full_survey_df["options"].apply(ast.literal_eval)
+    full_survey_df["responses"] = full_survey_df["responses"]
+    full_survey_df["ordinal"] = full_survey_df["ordinal"]
+    full_survey_df["options"] = full_survey_df["options"]
 
     steering_prompts_df["options"] = steering_prompts_df["options"].apply(ast.literal_eval)
     steering_demographics_df["group"] = steering_demographics_df["group"].apply(ast.literal_eval)
@@ -254,7 +253,7 @@ if __name__ == "__main__":
     dataset_name = args.dataset
     output_dir = REPO_ROOT / "data" / dataset_name / "processed"
     response_distribution_file_path = (
-        REPO_ROOT / "data" / dataset_name / "processed" / f"{dataset_name}.csv"
+        REPO_ROOT / "data" / dataset_name / "processed" / f"{dataset_name.replace('-', '_')}.jsonl"
     )
     steer_prompts_file_path = args.steer_prompts_file_path
     steer_demographics_file_path = args.steer_demographics_file_path
