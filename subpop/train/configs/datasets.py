@@ -47,7 +47,7 @@ class opnqa_steering_dataset:
     file: str = "subpop/train/datasets/opinionqa_dataset.py:get_preprocessed_opinionqa_ce_or_wd_loss"
     train_split: str = "subpop/train/datasets/{dataset_path}/opnqa_{steering_type}_train.csv"
     valid_split: str = "subpop/train/datasets/{dataset_path}/opnqa_{steering_type}_val.csv"
-    test_split:  str = "subpop/train/datasets/{dataset_path}/opnqa_{steering_type}_test.csv"
+#    test_split:  str = "subpop/train/datasets/{dataset_path}/opnqa_{steering_type}_test.csv"
 
 @dataclass
 class opnqa_single_demographic_dataset:
@@ -55,4 +55,4 @@ class opnqa_single_demographic_dataset:
     file: str = "subpop/train/datasets/opinionqa_dataset.py:get_preprocessed_opinionqa_ce_or_wd_loss"
     train_split: str = "subpop/train/datasets/{dataset_path}/opnqa_{attribute}_{group}_{steering_type}_train.csv"
     valid_split: str = "subpop/train/datasets/{dataset_path}/opnqa_{attribute}_{group}_{steering_type}_val.csv"
-    test_split:  str = "subpop/train/datasets/{dataset_path}/opnqa_{attribute}_{group}_{steering_type}_test.csv"
+#    test_split:  str = "subpop/train/datasets/{dataset_path}/opnqa_{attribute}_{group}_{steering_type}_test.csv"
